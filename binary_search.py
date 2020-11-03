@@ -13,11 +13,13 @@ def binary_search(list, value):
         middle = (low + high) // 2
 
     if low > high:
-        print("No value")
+        return ("No value")
+        # print("No value")
+
     else:
-        print("ID = ", middle)
+        return middle
+        # print("ID =", middle)
 
-
-# list = [10, 0, -1,  2, 4, 3]
-# sorting(list)
-# binary_search(list, 10)
+# list = [100, 50, 20, 10]
+# index = binary_search(list, 50)
+# print(index)
