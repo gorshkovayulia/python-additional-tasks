@@ -13,9 +13,7 @@ def binary_search(list, value):
         middle = (low + high) // 2
 
     if low > high:
-        return ("No value")
-        # print("No value")
-
+        return -1
     else:
         return middle
         # print("ID =", middle)
