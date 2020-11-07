@@ -53,12 +53,12 @@ class BinarySearchTestCase(unittest.TestCase):
     def test_looking_for_not_existing_value_does_not_return_index(self):
         list = [2, 5, 10, 87, 700]
         value = binary_search(list, 150)
-        self.assertEqual(value, 'No value')
+        self.assertEqual(-1, value)
 
     def test_looking_for_value_in_list_sorted_in_descending_order_does_not_return_index(self):
         list = [100, 50, 20, 1]
         value = binary_search(list, 100)
-        self.assertEqual(value, 'No value')
+        self.assertEqual(-1, value)
 
     def test_looking_for_none_value_raises_error(self):
         list = [2, 5, 1, 8, 7]
