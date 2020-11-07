@@ -7,37 +7,37 @@ class BinarySearchTestCase(unittest.TestCase):
     def test_looking_for_value_in_list_sorted_in_ascending_order_returns_correct_index(self):
         list = [-1, 0, 3, 44, 87, 100]
         id = binary_search(list, 0)
-        self.assertEqual(id, 1)
+        self.assertEqual(1, id)
 
-    def test_correct_index_is_returned_in_case_the_searching_value_corresponds_to_the_calculated_middle_value_of_list(self):
+    def test_correct_index_is_returned_when_searching_value_in_the_middle(self):
         list = [2, 3, 4, 10]
         id = binary_search(list, 4)
-        self.assertEqual(id, 2)
+        self.assertEqual(2, id)
 
     def test_looking_for_value_in_list_with_odd_number_of_elements_returns_correct_index(self):
         list = [2, 8, 10, 88, 70]
         id = binary_search(list, 10)
-        self.assertEqual(id, 2)
+        self.assertEqual(2, id)
 
     def test_looking_for_index_for_the_smallest_number_in_list_returns_zero_index(self):
         list = [-5, 10, 120, 300]
         id = binary_search(list, -5)
-        self.assertEqual(id, 0)
+        self.assertEqual(0, id)
 
     def test_looking_for_index_for_the_biggest_number_in_list_returns_the_biggest_index(self):
         list = [-5, 10, 120, 300]
         id = binary_search(list, 300)
-        self.assertEqual(id, 3)
+        self.assertEqual(3, id)
 
     def test_looking_for_value_in_list_with_one_element_returns_zero_index(self):
         list = [5]
         id = binary_search(list, 5)
-        self.assertEqual(id, 0)
+        self.assertEqual(0, id)
 
     def test_looking_for_value_of_int_type_in_list_of_strings_raises_error(self):
         list = ['Karl', 'Maria', 'Anna']
         try:
-            binary_search(list, 10)
+            id = binary_search(list, 10)
             self.fail('Should be an error')
         except TypeError:
             self.assertEqual("'>' not supported between instances of 'int' and 'str'", "'>' not supported between instances of 'int' and 'str'")
@@ -66,7 +66,7 @@ class BinarySearchTestCase(unittest.TestCase):
             binary_search(list, None)
             self.fail('Should be an error')
         except TypeError:
-            self.assertEqual("'>' not supported between instances of 'NoneType' and 'int'", "'>' not supported between instances of 'NoneType' and 'int'")
+            self.assertEqual("Value should be 'str' or 'int' type", "Value should be 'str' or 'int' type")
 
     def test_looking_for_word_in_list_of_numbers_raises_error(self):
         list = [2, 10, 55, 586]
