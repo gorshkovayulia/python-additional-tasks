@@ -54,8 +54,9 @@ class BubbleSortingTestCase(unittest.TestCase):
         try:
             sorting(list)
             self.fail("Should be an error")
-        except TypeError:
-            self.assertEqual("'>' not supported between instances of 'str' and 'int'", "'>' not supported between instances of 'str' and 'int'")
+        except TypeError as e:
+            str(e)
+            self.assertEqual("'>' not supported between instances of 'str' and 'int'", str(e))
 
     def test_sorting_of_empty_list_does_not_raise_error(self):
         list = []
@@ -67,8 +68,9 @@ class BubbleSortingTestCase(unittest.TestCase):
         try:
             sorting(list)
             self.fail("Should be an exception")
-        except TypeError:
-            self.assertEqual("No list!", "No list!")
+        except TypeError as e:
+            str(e)
+            self.assertEqual("No list!", str(e))
 
 if __name__ == "__main__":
     unittest.main()

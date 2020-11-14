@@ -2,25 +2,8 @@ from bubble_sorting import sorting
 
 def binary_search(list, value):
 
-    if list == []:
-        raise IndexError("list index out of range")
-
     if value == None:
-        raise TypeError("Value should be 'str' or 'int' type")
-
-    if type(value) == int:
-        for i in list:
-            if type(i) == int:
-                pass
-            if type(i) == str:
-                raise TypeError("'>' not supported between instances of 'int' and 'str'")
-
-    if type(value) == str:
-        for i in list:
-            if type(i) == str:
-                pass
-            if type(i) == int:
-                raise TypeError("'>' not supported between instances of 'int' and 'str'")
+        raise TypeError("The list cannot be None")
 
     middle = len(list) // 2
     low = 0
@@ -39,6 +22,6 @@ def binary_search(list, value):
         return middle
 
 
-# list = [100, 50, 20, 10]
+# list = []
 # index = binary_search(list, 50)
 # print(index)
