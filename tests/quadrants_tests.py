@@ -1,24 +1,8 @@
 import unittest
+# sys.path.append('/path/python/plates' )
 from quadrants import Quadrants
 
 class TestQuadrants(unittest.TestCase):
-    """Tests for Quadrants class"""
-
-    def test_start_row_with_0_value_is_saved(self):
-        quadrants = Quadrants(0, 0)
-        self.assertEqual(0, quadrants.start_row)
-
-    def test_start_column_with_0_value_is_saved(self):
-        quadrants = Quadrants(0, 0)
-        self.assertEqual(0, quadrants.start_column)
-
-    def test_start_row_with_1_value_is_saved(self):
-        quadrants = Quadrants(1, 0)
-        self.assertEqual(1, quadrants.start_row)
-
-    def test_start_column_with_1_value_is_saved(self):
-        quadrants = Quadrants(0, 1)
-        self.assertEqual(1, quadrants.start_column)
 
     def test_negative_start_row_raises_value_error(self):
         try:
