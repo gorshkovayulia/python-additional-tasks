@@ -1,6 +1,5 @@
 from dimensions import Dimensions
-from quadrants import Quadrants
-
+from quadrant import Quadrant
 
 class PlateCell:
     
@@ -17,8 +16,7 @@ class PlateCell:
             raise ValueError("Cell number cannot be less than zero!")
         elif cell_number > self.dimensions.get_capacity():
             raise ValueError(str(cell_number) + " cell number is too big for " + str(self.dimensions.get_tuple()) + " dimension!")
-        else:
-            self.cell_number = cell_number
+        self.cell_number = cell_number
 
     def calculate_row_and_column(self):
         """
@@ -27,30 +25,31 @@ class PlateCell:
         """
         row = (self.cell_number - 1) % self.dimensions.number_of_rows
         column = (self.cell_number - 1) // self.dimensions.number_of_rows
-        return row, column
+        return row + 1, column + 1
+
+    def get_new_row_and_new_column_for_higher_density(self):
+        (row, column) = self.calculate_row_and_column()
+        new_row = (row - 1) * 2
+        new_column = (column - 1) * 2
+        return new_row + 1, new_column + 1
 
     def as_string(self):
         """Return human readable coordinate (e.g. A01, C12, AA01 etc)."""
         (row, column) = self.calculate_row_and_column()
-        if column < 9:
-            return self.LETTERS[row] + str(0) + str(column + 1)
+        if column < 10:
+            return PlateCell.LETTERS[row - 1] + str(0) + str(column)
         else:
-            return self.LETTERS[row] + str(column + 1)
+            return PlateCell.LETTERS[row - 1] + str(column)
 
-    def to_higher_density(self, quadrants):
+    def to_higher_density(self, quadrant):
         """
         Needed for plate stamping - to know where this cell will end up after the transfer to a bigger plate.
         Return: a new PlateCell, the one that corresponds to a higher density (e.g. 96 if current was 24, 384 if current was 96, etc).
         """
-        (row, column) = self.calculate_row_and_column()
-        new_row = row * 2
-        new_column = column * 2
-        if self.dimensions.number_of_rows == 4:
-            new_index = ((new_column + quadrants.start_column) * 8) + new_row + quadrants.start_row
-            return new_index + 1
-        elif self.dimensions.number_of_rows == 8:
-            new_index = ((new_column + quadrants.start_column) * 16) + new_row + quadrants.start_row
-            return new_index + 1
-        elif self.dimensions.number_of_rows == 16:
-            new_index = ((new_column + quadrants.start_column) * 32) + new_row + quadrants.start_row
-            return new_index + 1
+        (new_row, new_column) = self.get_new_row_and_new_column_for_higher_density()
+        new_index = (((new_column - 1) + quadrant.start_column) * self.dimensions.get_new_number_of_rows()) + (new_row - 1) + quadrant.start_row
+        return new_index + 1
+
+
+
+

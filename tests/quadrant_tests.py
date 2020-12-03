@@ -1,127 +1,111 @@
 import unittest
-# sys.path.append('/path/python/plates' )
-from quadrants import Quadrants
+from quadrant import Quadrant
 
 class TestQuadrants(unittest.TestCase):
 
     def test_negative_start_row_raises_value_error(self):
         try:
-            quadrants = Quadrants(-1, 0)
+            Quadrant(-1, 0)
             self.fail("Should be an exception")
         except ValueError as e:
-            str(e)
             self.assertEqual("Start row and start column cannot be less than 0!", str(e))
 
     def test_negative_start_column_raises_value_error(self):
         try:
-            quadrants = Quadrants(0, -1)
+            Quadrant(0, -1)
             self.fail("Should be an exception")
         except ValueError as e:
-            str(e)
             self.assertEqual("Start row and start column cannot be less than 0!", str(e))
 
     def test_negative_start_column_and_start_row_raise_value_error(self):
         try:
-            quadrants = Quadrants(-1, -1)
+            Quadrant(-1, -1)
             self.fail("Should be an exception")
         except ValueError as e:
-            str(e)
             self.assertEqual("Start row and start column cannot be less than 0!", str(e))
 
     def test_value_error_appears_if_start_row_is_more_than_1(self):
         try:
-            quadrants = Quadrants(2, 0)
+            Quadrant(2, 0)
             self.fail("Should be an exception")
         except ValueError as e:
-            str(e)
             self.assertEqual("Start row and start column cannot be more than 1!", str(e))
 
     def test_value_error_appears_if_start_column_is_more_than_1(self):
         try:
-            quadrants = Quadrants(0, 2)
+            Quadrant(0, 2)
             self.fail("Should be an exception")
         except ValueError as e:
-            str(e)
             self.assertEqual("Start row and start column cannot be more than 1!", str(e))
 
     def test_value_error_appears_if_start_row_and_start_column_are_more_than_1(self):
         try:
-            quadrants = Quadrants(2, 2)
+            Quadrant(2, 2)
             self.fail("Should be an exception")
         except ValueError as e:
-            str(e)
             self.assertEqual("Start row and start column cannot be more than 1!", str(e))
 
     def test_type_error_appears_if_start_row_is_decimal_number(self):
         try:
-            quadrants = Quadrants(0.5, 1)
+            Quadrant(0.5, 1)
             self.fail("Should be an exception")
         except TypeError as e:
-            str(e)
             self.assertEqual("Start row and start column should be int!", str(e))
 
     def test_type_error_appears_if_start_column_is_decimal_number(self):
         try:
-            quadrants = Quadrants(1, 0.5)
+            Quadrant(1, 0.5)
             self.fail("Should be an exception")
         except TypeError as e:
-            str(e)
             self.assertEqual("Start row and start column should be int!", str(e))
 
     def test_type_error_appears_if_start_column_and_start_row_are_decimal_numbers(self):
         try:
-            quadrants = Quadrants(0.5, 0.5)
+            Quadrant(0.5, 0.5)
             self.fail("Should be an exception")
         except TypeError as e:
-            str(e)
             self.assertEqual("Start row and start column should be int!", str(e))
 
     def test_type_error_appears_if_start_row_is_none(self):
         try:
-            quadrants = Quadrants(None, 1)
+            Quadrant(None, 1)
             self.fail("Should be an exception")
         except TypeError as e:
-            str(e)
             self.assertEqual("Start row or start column are absent!", str(e))
 
     def test_type_error_appears_if_start_column_is_none(self):
         try:
-            quadrants = Quadrants(1, None)
+            Quadrant(1, None)
             self.fail("Should be an exception")
         except TypeError as e:
-            str(e)
             self.assertEqual("Start row or start column are absent!", str(e))
 
     def test_type_error_appears_if_start_column_and_start_row_are_none(self):
         try:
-            quadrants = Quadrants(None, None)
+            Quadrant(None, None)
             self.fail("Should be an exception")
         except TypeError as e:
-            str(e)
             self.assertEqual("Start row or start column are absent!", str(e))
 
     def test_type_error_appears_if_start_row_is_text(self):
         try:
-            quadrants = Quadrants('test', 1)
+            Quadrant('test', 1)
             self.fail("Should be an exception")
         except TypeError as e:
-            str(e)
             self.assertEqual("'<' not supported between instances of 'str' and 'int'", str(e))
 
     def test_type_error_appears_if_start_column_is_text(self):
         try:
-            quadrants = Quadrants(1, 'test')
+            Quadrant(1, 'test')
             self.fail("Should be an exception")
         except TypeError as e:
-            str(e)
             self.assertEqual("'<' not supported between instances of 'str' and 'int'", str(e))
 
     def test_type_error_appears_if_start_column_and_start_row_are_text(self):
         try:
-            quadrants = Quadrants('test', 'test')
+            Quadrant('test', 'test')
             self.fail("Should be an exception")
         except TypeError as e:
-            str(e)
             self.assertEqual("'<' not supported between instances of 'str' and 'int'", str(e))
 
 if __name__ == "__main__":
