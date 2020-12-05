@@ -1,7 +1,8 @@
 import unittest
-from plate_cell import PlateCell
-from dimensions import Dimensions
-from quadrant import Quadrant
+
+from plates.plate_cell import PlateCell
+from plates.dimensions import Dimensions
+from plates.quadrant import Quadrant
 
 class TestPlateCell(unittest.TestCase):
 
@@ -62,17 +63,17 @@ class TestPlateCell(unittest.TestCase):
     def test_first_row_and_first_column_are_returned_for_the_first_cell_in_384_plate_in_case_first_quadrant(self):
         dimensions = Dimensions(16, 24)
         cell = PlateCell(1, dimensions)
-        self.assertEqual((1, 1), cell.calculate_row_and_column())
+        self.assertEqual((0, 0), cell.calculate_row_and_column())
 
     def test_sixteenth_row_and_twelfth_column_are_returned_for_the_middle_cell_in_384_plate_in_case_first_quadrant(self):
         dimensions = Dimensions(16, 24)
         cell = PlateCell(192, dimensions)
-        self.assertEqual((16, 12), cell.calculate_row_and_column())
+        self.assertEqual((15, 11), cell.calculate_row_and_column())
 
     def test_sixteenth_row_and_twenty_fourth_column_are_returned_for_the_last_cell_in_384_plate_in_case_first_quadrant(self):
         dimensions = Dimensions(16, 24)
         cell = PlateCell(384, dimensions)
-        self.assertEqual((16, 24), cell.calculate_row_and_column())
+        self.assertEqual((15, 23), cell.calculate_row_and_column())
 
     def test_A01_coordinate_is_returned_for_the_first_cell_on_384_plate(self):
         dimensions = Dimensions(16, 24)
@@ -81,8 +82,7 @@ class TestPlateCell(unittest.TestCase):
 
     def test_P09_coordinate_is_returned_for_the_middle_cell_on_384_plate(self):
         dimensions = Dimensions(16, 24)
-        quadrants = Quadrant(0, 0)
-        cell = PlateCell(144, dimensions, quadrants)
+        cell = PlateCell(144, dimensions)
         self.assertEqual('P09', cell.as_string())
 
     def test_P24_coordinate_is_returned_for_the_last_cell_on_384_plate(self):
@@ -117,7 +117,7 @@ class TestPlateCell(unittest.TestCase):
     def test_middle_cell_on_384_plate_corresponds_767_cell_on_1536_plate_in_case_second_quadrant(self):
         dimensions = Dimensions(16, 24)
         quadrant = Quadrant(0, 1)
-        cell = PlateCell(192, dimensions, quadrant)
+        cell = PlateCell(192, dimensions)
         self.assertEqual(767, cell.to_higher_density(quadrant))
 
     def test_last_cell_on_384_plate_corresponds_1535_cell_on_1536_plate_in_case_second_quadrant(self):

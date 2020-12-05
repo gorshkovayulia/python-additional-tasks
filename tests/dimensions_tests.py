@@ -1,5 +1,5 @@
 import unittest
-from dimensions import Dimensions
+from plates.dimensions import Dimensions
 
 class TestDimensions(unittest.TestCase):
 
