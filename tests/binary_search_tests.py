@@ -1,5 +1,5 @@
 import unittest
-from binary_search import binary_search
+from binary_search.binary_search import binary_search
 
 class BinarySearchTestCase(unittest.TestCase):
     """Tests for binary search."""

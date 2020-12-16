@@ -1,6 +1,7 @@
 from plates.dimensions import Dimensions
 from plates.quadrant import Quadrant
 
+
 class PlateCell:
     
     LETTERS = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S',
@@ -45,8 +46,3 @@ class PlateCell:
         new_column = column * 2
         new_index = ((new_column + quadrant.start_column) * self.dimensions.get_new_number_of_rows()) + new_row + quadrant.start_row
         return new_index + 1
-
-
-
-
-

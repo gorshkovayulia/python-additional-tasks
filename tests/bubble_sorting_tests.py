@@ -1,5 +1,5 @@
 import unittest
-from bubble_sorting import sorting
+from bubble_sorting.bubble_sorting import sorting
 
 class BubbleSortingTestCase(unittest.TestCase):
     """Tests for bubble sorting"""

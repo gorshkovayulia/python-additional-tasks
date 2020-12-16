@@ -4,6 +4,7 @@ from plates.plate_cell import PlateCell
 from plates.dimensions import Dimensions
 from plates.quadrant import Quadrant
 
+
 class TestPlateCell(unittest.TestCase):
 
     def test_zero_cell_number_raises_type_error(self):

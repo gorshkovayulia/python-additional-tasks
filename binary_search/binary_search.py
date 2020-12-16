@@ -1,8 +1,9 @@
-from bubble_sorting import sorting
+from bubble_sorting.bubble_sorting import sorting
+
 
 def binary_search(list, value):
 
-    if value == None:
+    if value is None:
         raise TypeError("The list cannot be None")
 
     middle = len(list) // 2
@@ -20,8 +21,3 @@ def binary_search(list, value):
         return -1
     else:
         return middle
-
-
-# list = []
-# index = binary_search(list, 50)
-# print(index)

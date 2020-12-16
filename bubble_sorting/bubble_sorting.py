@@ -1,6 +1,6 @@
 def sorting(list):
 
-    if list == None:
+    if list is None:
         raise TypeError("No list!")
 
     swapped = True
@@ -12,7 +12,3 @@ def sorting(list):
                 list[i] = list[i + 1]
                 list[i + 1] = temp
                 swapped = True
-
-# list = None
-# sorting(list)
-# print(list)
