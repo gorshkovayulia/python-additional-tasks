@@ -4,40 +4,26 @@ from linked_list.linked_list import LinkedList
 
 class TestLinkedList(unittest.TestCase):
 
-    def test_attempt_to_add_none_value_raises_type_error(self):
-        linkedlist = LinkedList()
-        try:
-            linkedlist.append(None)
-            self.fail("Should be an exception")
-        except TypeError as e:
-            self.assertEqual("Value is absent!", str(e))
-
     def test_possible_to_add_value_of_any_type(self):
         linkedlist = LinkedList()
-        linkedlist.append(-2.89)
+        linkedlist.append(None)
         linkedlist.append(0)
         linkedlist.append('test')
-        self.assertEqual(1, linkedlist.length_of_list)
+        linkedlist.append(-2.89)
+        self.assertEqual(4, linkedlist.get_size())
 
-    def test_length_is_0_if_no_elements_were_have_been_added(self):
+    def test_size_is_0_if_no_elements_have_been_added(self):
         linkedlist = LinkedList()
         self.assertEqual(0, linkedlist.get_size())
 
-    def test_length_is_1_if_one_element_has_been_added(self):
+    def test_size_is_1_if_one_element_has_been_added(self):
         linkedlist = LinkedList()
         linkedlist.append('test')
         self.assertEqual(1, linkedlist.get_size())
 
-    def test_type_error_appears_if_searching_index_is_none(self):
-        linkedlist = LinkedList()
-        try:
-            linkedlist.get_value(None)
-            self.fail("Should be an exception")
-        except TypeError as e:
-            self.assertEqual("Index is absent!", str(e))
-
     def test_type_error_appears_if_searching_index_is_string_type(self):
         linkedlist = LinkedList()
+        linkedlist.append('test')
         try:
             linkedlist.get_value('test')
             self.fail("Should be an exception")
@@ -46,6 +32,7 @@ class TestLinkedList(unittest.TestCase):
 
     def test_type_error_appears_if_searching_index_is_float_type(self):
         linkedlist = LinkedList()
+        linkedlist.append('test')
         try:
             linkedlist.get_value(0.15)
             self.fail("Should be an exception")
@@ -54,6 +41,7 @@ class TestLinkedList(unittest.TestCase):
 
     def test_value_error_appears_if_searching_index_is_negative(self):
         linkedlist = LinkedList()
+        linkedlist.append('test')
         try:
             linkedlist.get_value(-1)
             self.fail("Should be an exception")
@@ -62,11 +50,12 @@ class TestLinkedList(unittest.TestCase):
 
     def test_raises_type_error_when_index_is_greater_than_upped_bound(self):
         linkedlist = LinkedList()
+        linkedlist.append('test')
         try:
             linkedlist.get_value(10)
             self.fail("Should be an exception")
         except ValueError as e:
-            self.assertEqual("List is empty!", str(e))
+            self.assertEqual("Index is too big for current list!", str(e))
 
     def test_can_get_first_element(self):
         linkedlist = LinkedList()
@@ -116,13 +105,13 @@ class TestLinkedList(unittest.TestCase):
         linkedlist.remove(0)
         self.assertEqual(0, linkedlist.get_size())
 
-    def test_attempt_to_remove_element_from_empty_list_raises_type_error(self):
+    def test_attempt_to_remove_element_from_empty_list_raises_value_error(self):
         linkedlist = LinkedList()
         try:
             linkedlist.remove(1)
             self.fail("Should be an exception")
-        except TypeError as e:
-            self.assertEqual("The list does not have any elements!", str(e))
+        except ValueError as e:
+            self.assertEqual("List is empty!", str(e))
 
     def test_attempt_to_remove_none_value_raises_type_error(self):
         linkedlist = LinkedList()

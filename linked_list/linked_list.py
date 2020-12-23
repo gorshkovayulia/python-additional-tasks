@@ -1,30 +1,77 @@
-from element import Element
+from linked_list.node import Node
 
 
 class LinkedList:
     def __init__(self):
-        self.first_element = None
-        self.last_element = None
-        self.length_of_list = 0
+        self.first_node = None
+        self.last_node = None
+        self.size = 0
+
+    @staticmethod
+    def middle_value():
+        """Calculate middle value in the list"""
 
     def append(self, new_value):
         """Add a new element at the end of the list."""
-        if new_value is None:
-            raise TypeError("Value is absent!")
-        self.length_of_list += 1
-        if self.first_element is None:
-            self.first_element = Element(new_value)
-            self.last_element = self.first_element
+        self.size += 1
+        new_node = Node(new_value)
+        if self.first_node is None:
+            self.first_node = new_node
         else:
-            self.last_element.next_element = Element(new_value)
+            self.last_node.next_node = new_node
+            new_node.previous_node = self.last_node
+        self.last_node = new_node
 
     def get_size(self):
         """Return size of the list."""
-        return self.length_of_list
+        return self.size
 
     def get_value(self, index):
-        """Go through the list and compare index of element with index of value."""
-        if self.length_of_list == 0:
+        """Go through the list and compare current index with searching index."""
+        self._assert_index(index)
+        middle_value = self.size // 2
+        if index + 1 <= middle_value:
+            current_node = self.first_node
+            current_index = 0
+            while current_index != index:
+                current_index += 1
+                current_node = current_node.next_node
+        else:
+            current_node = self.last_node
+            current_index = self.size - 1
+            while current_index != index:
+                current_index -= 1
+                current_node = current_node.previous_node
+        return current_node.value
+
+    def remove(self, index):
+        self._assert_index(index)
+        middle_value = self.size // 2
+        if index + 1 <= middle_value:
+            if index == 0:
+                self.first_node = self.first_node.next_node
+            else:
+                current_node = self.first_node
+                current_index = 0
+                while current_index != index - 1:
+                    current_index += 1
+                    current_node = current_node.next_node
+                current_node.next_node = current_node.next_node.next_node
+        else:
+            if index == middle_value:
+                self.first_node = self.first_node.next_node
+                self.last_node = self.first_node
+            else:
+                current_node = self.last_node
+                current_index = self.size - 1
+                while current_index != index - 1:
+                    current_index -= 1
+                    current_node = current_node.previous_node
+                current_node.next_node = current_node.next_node.next_node
+        self.size -= 1
+
+    def _assert_index(self, index):
+        if self.size == 0:
             raise ValueError("List is empty!")
         elif index is None:
             raise TypeError("Index is absent!")
@@ -32,33 +79,7 @@ class LinkedList:
             raise TypeError("Index must be int!")
         elif index < 0:
             raise ValueError("Index cannot be less than 0!")
-        elif index + 1 > self.length_of_list:
+        elif index >= self.size:
             raise ValueError("Index is too big for current list!")
-        current_element = self.first_element
-        index_of_element = 0
-        while index_of_element <= index:
-            if index_of_element == index:
-                return current_element.value
-            else:
-                index_of_element += 1
-                current_element = self.first_element.next_node
 
-    def remove(self, index):
-        if self.length_of_list == 0:
-            raise ValueError("The list does not have any elements!")
-        elif index is None:
-            raise TypeError("Index is absent!")
-        elif type(index) is not int:
-            raise TypeError("Index must be int!")
-        elif index < 0:
-            raise ValueError("Index cannot be less than 0!")
-        elif index + 1 > self.length_of_list:
-            raise ValueError("Index is too big for current list!")
-        previous_element = None
-        current_element = self.first_element
-        # index_of_element = 0
-        while current_element.value is not None:
-            previous_element = current_element
-            current_element = current_element.next_element
-        if previous_element is None:
-            self.first_element = current_element.next_element
+
