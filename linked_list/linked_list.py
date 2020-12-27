@@ -7,10 +7,6 @@ class LinkedList:
         self.last_node = None
         self.size = 0
 
-    @staticmethod
-    def middle_value():
-        """Calculate middle value in the list"""
-
     def append(self, new_value):
         """Add a new element at the end of the list."""
         self.size += 1
@@ -50,6 +46,8 @@ class LinkedList:
         if index + 1 <= middle_value:
             if index == 0:
                 self.first_node = self.first_node.next_node
+            if index == self.size - 1:
+                self.last_node = self.last_node.previous_node
             else:
                 current_node = self.first_node
                 current_index = 0
@@ -58,6 +56,8 @@ class LinkedList:
                     current_node = current_node.next_node
                 current_node.next_node = current_node.next_node.next_node
         else:
+            if index == self.size - 1:
+                self.last_node = self.last_node.previous_node
             if index == middle_value:
                 self.first_node = self.first_node.next_node
                 self.last_node = self.first_node
