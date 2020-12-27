@@ -18,12 +18,27 @@ class LinkedList:
             new_node.previous_node = self.last_node
         self.last_node = new_node
 
-    def get_size(self):
+    def get_size(self) -> int:
         """Return size of the list."""
         return self.size
 
-    def get_value(self, index):
-        """Go through the list and compare current index with searching index."""
+    def get_value(self, index: int):
+        """Return a value for searching index."""
+        return self._get_node(index).value
+
+    def remove(self, index: int):
+        """Remove element from the list."""
+        to_delete = self._get_node(index)
+        if index == 0:
+            self.first_node = self.first_node.next_node
+        elif index == self.size - 1:
+            self.last_node = self.last_node.previous_node
+        else:
+            to_delete.previous_node.next_node = to_delete.next_node
+        self.size -= 1
+
+    def _get_node(self, index: int):
+        """Split the list into 2 parts and find corresponding node for the searching index."""
         self._assert_index(index)
         middle_value = self.size // 2
         if index + 1 <= middle_value:
@@ -38,39 +53,9 @@ class LinkedList:
             while current_index != index:
                 current_index -= 1
                 current_node = current_node.previous_node
-        return current_node.value
+        return current_node
 
-    def remove(self, index):
-        self._assert_index(index)
-        middle_value = self.size // 2
-        if index + 1 <= middle_value:
-            if index == 0:
-                self.first_node = self.first_node.next_node
-            if index == self.size - 1:
-                self.last_node = self.last_node.previous_node
-            else:
-                current_node = self.first_node
-                current_index = 0
-                while current_index != index - 1:
-                    current_index += 1
-                    current_node = current_node.next_node
-                current_node.next_node = current_node.next_node.next_node
-        else:
-            if index == self.size - 1:
-                self.last_node = self.last_node.previous_node
-            if index == middle_value:
-                self.first_node = self.first_node.next_node
-                self.last_node = self.first_node
-            else:
-                current_node = self.last_node
-                current_index = self.size - 1
-                while current_index != index - 1:
-                    current_index -= 1
-                    current_node = current_node.previous_node
-                current_node.next_node = current_node.next_node.next_node
-        self.size -= 1
-
-    def _assert_index(self, index):
+    def _assert_index(self, index: int):
         if self.size == 0:
             raise ValueError("List is empty!")
         elif index is None:
