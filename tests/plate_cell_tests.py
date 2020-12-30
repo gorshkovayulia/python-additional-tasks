@@ -163,5 +163,11 @@ class TestPlateCell(unittest.TestCase):
         cell = PlateCell(384, dimensions)
         self.assertEqual(1536, cell.to_higher_density(quadrant))
 
+    def test_1_cell_number_is_returned_for_A1_coordinate_on_96_plate(self):
+        self.assertEqual(1, PlateCell.parse_string("A01", Dimensions(8, 12)))
+
+    def test_96_cell_number_is_returned_for_H12_coordinate_on_96_plate(self):
+        self.assertEqual(96, PlateCell.parse_string("H12", Dimensions(8, 12)))
+
 if __name__ == "__main__":
     unittest.main()
