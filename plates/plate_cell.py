@@ -1,5 +1,6 @@
 from plates.dimensions import Dimensions
 from plates.quadrant import Quadrant
+import re
 
 
 class PlateCell:
@@ -19,6 +20,16 @@ class PlateCell:
             raise ValueError(str(cell_number) + " cell number is too big for " + str(self.dimensions.get_tuple()) + " dimension!")
         self.cell_number = cell_number
 
+    @staticmethod
+    def parse_string(cell, dimensions):
+        """Return cell number for coordinate on the plate, e.g. cell number = 16 for "H02" coordinate on 96 plate."""
+        result = re.match(r"([A-Z]*)([0-48]*)", cell)
+        list = result.groups()
+        column = int(list[1]) - 1
+        row = PlateCell.LETTERS.index(list[0])
+        index = column * dimensions.number_of_rows + row
+        return index + 1
+
     def calculate_row_and_column(self):
         """
         Calculate row and column based on cell number.
@@ -33,8 +44,7 @@ class PlateCell:
         (row, column) = self.calculate_row_and_column()
         if column < 9:
             return PlateCell.LETTERS[row] + str(0) + str(column + 1)
-        else:
-            return PlateCell.LETTERS[row] + str(column + 1)
+        return PlateCell.LETTERS[row] + str(column + 1)
 
     def to_higher_density(self, quadrant):
         """

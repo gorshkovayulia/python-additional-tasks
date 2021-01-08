@@ -171,5 +171,6 @@ class TestLinkedList(unittest.TestCase):
         linkedlist.remove(1)
         self.assertEqual(2, linkedlist.get_size())
 
+
 if __name__ == "__main__":
     unittest.main()
