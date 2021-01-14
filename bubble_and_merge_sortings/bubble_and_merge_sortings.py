@@ -26,7 +26,7 @@ class BubbleSorter(implements(Sorter)):
 
 class MergeSorter(implements(Sorter)):
 
-    def merge(self, left_list, right_list):
+    def _merge(self, left_list, right_list):
         sorted_list = []
         left_list_index = right_list_index = 0
         left_list_length = len(left_list)
@@ -57,5 +57,5 @@ class MergeSorter(implements(Sorter)):
         middle = len(list) // 2
         left_list = self.sort(list[:middle])  # Sort and merge left sub-list
         right_list = self.sort(list[middle:])  # Sort and merge right sub-list
-        return self.merge(left_list, right_list)  # Merge sorted sub-lists into one sorted list
+        return self._merge(left_list, right_list)  # Merge sorted sub-lists into one sorted list
 

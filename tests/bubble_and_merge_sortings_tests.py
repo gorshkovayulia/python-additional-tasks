@@ -1,5 +1,5 @@
 import unittest
-from bubble_and_merge_sorting.bubble_and_merge_sorting import BubbleSorter, MergeSorter
+from bubble_and_merge_sortings.bubble_and_merge_sortings import BubbleSorter, MergeSorter
 
 
 class BubbleSorterTestCase(unittest.TestCase):
